@@ -3,34 +3,33 @@
 
 size_t String::count = 0;
 
-// Конструктор по умолчанию (создает строку длиной 80)
 String::String() : String(80) {}
 
-// Конструктор, выделяющий память под строку заданной длины
+
 String::String(size_t size) : length(size) {
     str = new char[length + 1];
     str[0] = '\0';
     ++count;
 }
 
-// Конструктор, создающий строку на основе переданного C-строки
+
 String::String(const char* input) : length(std::strlen(input)) {
     str = new char[length + 1];
     std::strcpy(str, input);
     ++count;
 }
 
-// Конструктор копирования
+
 String::String(const String& other) : length(other.length) {
     str = new char[length + 1];
     std::strcpy(str, other.str);
     ++count;
 }
 
-// Оператор присваивания (гарантирует корректное копирование)
+
 String& String::operator=(const String& other) {
-    if (this != &other) {  // Защита от самоприсваивания
-        delete[] str;  // Освобождаем старую строку
+    if (this != &other) {  
+        delete[] str;  
 
         length = other.length;
         str = new char[length + 1];
@@ -39,32 +38,32 @@ String& String::operator=(const String& other) {
     return *this;
 }
 
-// Деструктор освобождает память
+
 String::~String() {
     delete[] str;
     str = nullptr;
     --count;
 }
 
-// Метод для ввода строки
+
 void String::input() {
-    std::cout << "Введите строку: ";
-    char buffer[1024];  // Буфер для ввода строки
+    std::cout << "Г‚ГўГҐГ¤ГЁГІГҐ Г±ГІГ°Г®ГЄГі: ";
+    char buffer[1024];  
     std::cin.getline(buffer, 1024);
 
-    delete[] str;  // Удаляем старую строку
+    delete[] str;  
 
     length = std::strlen(buffer);
     str = new char[length + 1];
     std::strcpy(str, buffer);
 }
 
-// Метод для вывода строки
+
 void String::display() const {
-    std::cout << "Строка: " << str << std::endl;
+    std::cout << "Г‘ГІГ°Г®ГЄГ : " << str << std::endl;
 }
 
-// Метод возвращает количество созданных объектов
+
 size_t String::getCount() {
     return count;
 }
